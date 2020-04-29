@@ -1,0 +1,39 @@
+import praw
+
+
+
+
+
+def get_output_file():
+    reddit = praw.Reddit(client_id='KxkOEBAfQfB2fA', client_secret='skij_5MfpLD4fZmXYQ1haZfd-2U', password='Reddit2020', user_agent='reddit_crawler by /u/donaldbiden1', username='donaldbiden1')
+
+    subreddit = reddit.subreddit('cybersecurity')
+    hot_cybersecurity = subreddit.hot(limit=50)
+    f = open("output.csv", "w")
+    f.close()
+
+    for submission in hot_cybersecurity:
+        f = open("output.csv", "a")
+        f.write('Title: {}, Upvotes: {}, Downvotes: {}\n'.format(submission.title, submission.ups, submission.downs))
+        f.close()
+
+
+
+
+def get_readable_output():
+    reddit = praw.Reddit(client_id='KxkOEBAfQfB2fA', client_secret='skij_5MfpLD4fZmXYQ1haZfd-2U', password='Reddit2020', user_agent='reddit_crawler by /u/donaldbiden1', username='donaldbiden1')
+
+    subreddit = reddit.subreddit('cybersecurity')
+    hot_cybersecurity = subreddit.hot(limit=20)
+
+    for submission in hot_cybersecurity:
+        print('Title: {}, Upvotes: {}, Downvotes: {}'.format(submission.title, submission.ups, submission.downs))
+
+
+def main():
+    get_output_file()
+    get_readable_output()
+
+
+if __name__ == "__main__":
+    main()
